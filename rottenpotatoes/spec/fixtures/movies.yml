@@ -1,0 +1,8 @@
+#spec/fixtures/movies.yml
+
+starwars_movie:
+  id: 1
+  title: Star Wars
+  rating: PG
+  director: George Lucas
+  release_date: 1977-05-25
