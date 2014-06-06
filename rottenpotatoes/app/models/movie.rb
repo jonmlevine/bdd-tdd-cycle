@@ -7,6 +7,11 @@ class Movie < ActiveRecord::Base
   end
   
   def other_movies_by_director
+    if self.director != nil && self.director != "" then
+      return Movie.where("id <> :id and director = :director", {id: self.id, director: self.director})
+    else
+      return nil
+    end
   end
 end
 
