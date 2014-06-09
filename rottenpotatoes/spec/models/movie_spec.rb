@@ -9,6 +9,8 @@ describe Movie do
     Movie.find(1).should_not be_nil
   end
   it 'finds only other movies by same director' do
-    Movie.find(1).other_movies_by_director.count.should == 1 
+    returned_movies = Movie.find(1).other_movies_by_director
+    returned_movies.count.should == 1 
+    returned_movies.should == [movies(:thx_1138_movie)]
   end
 end

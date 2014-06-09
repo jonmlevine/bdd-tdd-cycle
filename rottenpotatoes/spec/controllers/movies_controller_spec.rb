@@ -24,7 +24,7 @@ describe MoviesController do
         get :similar, :id => 1
         response.should render_template('similar')
       end
-      it 'should make the model other movies search results available to that template' do
+      it 'should make the model other movies search method results available to that template' do
         Movie.should_receive(:find).with("1").and_return(fake_movie)
         fake_movie.stub(:other_movies_by_director).and_return(fake_results)
         get :similar, :id => 1
