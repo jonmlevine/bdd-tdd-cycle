@@ -9,7 +9,26 @@ describe MoviesController do
     end
   end
   
-  describe
+  describe 'Show New Movie Page' do
+    it 'should navigate to the new movie page' do
+      get :new
+      response.should render_template('new')
+    end
+  end
+  
+  describe 'Create a Movie' do
+    let (:fake_movie) {double("movie", :id => 99, :title => "A Jon's Life")}    
+    it 'should accept input and insert' do
+      Movie.should_receive(:create!).with("id" => "99", "title" => "A Jon's Life").and_return(fake_movie)
+      post :create, :movie => {:id => 99, :title => "A Jon's Life"}
+    end
+    it 'should display a nice message' do
+      Movie.should_receive(:create!).with("id" => "99", "title" => "A Jon's Life").and_return(fake_movie)
+      post :create, :movie => {:id => 99, :title => "A Jon's Life"}
+      flash[:notice].should eq("A Jon's Life was successfully created.")
+    end
+  end
+  
   describe 'Update a Movie' do
     let (:fake_movie) {double("movie", :id => 3, :title => "Alien", :director => "")}
     it 'should find a movie and update the director when asked' do
