@@ -11,6 +11,9 @@ describe Movie do
   it 'returns director when asked' do
     Movie.find(1).director.should_not be_nil
   end
+  it 'returns the legal ratings' do
+    Movie.all_ratings == %w(G PG PG-13 NC-17 R)
+  end
   it 'sets director when asked' do
     foo = Movie.find(1)
     foo.update_attributes!(:director => "Foo")
