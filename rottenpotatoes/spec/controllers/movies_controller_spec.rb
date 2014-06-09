@@ -9,6 +9,24 @@ describe MoviesController do
     end
   end
   
+  describe 'Movies Index Page' do
+    let (:fake_results) {[double("movieout1"), double("movieout2")]}
+    let (:fake_ratings) {{"G" => "G", "PG" => "PG", "PG-13" => "PG-13", "NC-17" => "NC-17", "R" => "R"}}
+    it 'should have some ratings selected' do
+      get :index
+      assigns(:selected_ratings).should_not be_nil
+    end
+    it 'should get some movies' do
+      Movie.should_receive(:find_all_by_rating).and_return(fake_results)
+      get :index
+      assigns(:movies).should == fake_results
+    end
+    it 'should set the session sort variable' do
+      get :index, {:sort => "title"}
+      session[:sort].should == "title"
+    end
+  end
+  
   describe 'Show New Movie Page' do
     it 'should navigate to the new movie page' do
       get :new
