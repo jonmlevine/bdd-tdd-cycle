@@ -8,6 +8,14 @@ describe Movie do
   it 'finds a movie by id' do
     Movie.find(1).should_not be_nil
   end
+  it 'returns director when asked' do
+    Movie.find(1).director.should_not be_nil
+  end
+  it 'sets director when asked' do
+    foo = Movie.find(1)
+    foo.update_attributes!(:director => "Foo")
+    foo.director.should == "Foo"
+  end
   it 'finds only other movies by same director' do
     returned_movies = Movie.find(1).other_movies_by_director
     returned_movies.count.should == 1 
