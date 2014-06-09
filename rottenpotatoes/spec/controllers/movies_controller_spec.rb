@@ -29,6 +29,16 @@ describe MoviesController do
     end
   end
   
+  describe 'Edit a Movie' do
+    let (:fake_movie) {double("movie", :id => 1)}
+    it 'should go to the edit page' do
+      Movie.should_receive(:find).with("1").and_return(fake_movie)
+      get :edit, :id => 1
+      response.should render_template('edit')
+    end
+  end
+
+  
   describe 'Update a Movie' do
     let (:fake_movie) {double("movie", :id => 3, :title => "Alien", :director => "")}
     it 'should find a movie and update the director when asked' do
