@@ -30,7 +30,7 @@ module NavigationHelpers
       
     when /^the Similar Movies page for \"(.*)\"$/
       "/movies/#{Movie.find_by_title($1).id}/similar"
-            
+               
     else
       begin
         page_name =~ /^the (.*) page$/

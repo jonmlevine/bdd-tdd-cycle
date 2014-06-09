@@ -17,7 +17,9 @@ Scenario: add director to existing movie
   When I go to the edit page for "Alien"
   And  I fill in "Director" with "Ridley Scott"
   And  I press "Update Movie Info"
-  Then the director of "Alien" should be "Ridley Scott"
+  Then I should be on the details page for "Alien"
+  And  I should see "Alien was successfully updated."
+  And  the director of "Alien" should be "Ridley Scott"
 
 Scenario: find movie with same director
   Given I am on the details page for "Star Wars"

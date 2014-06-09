@@ -9,6 +9,7 @@ describe MoviesController do
     end
   end
   
+  describe
   describe 'Update a Movie' do
     let (:fake_movie) {double("movie", :id => 3, :title => "Alien", :director => "")}
     it 'should find a movie and update the director when asked' do
