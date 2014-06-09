@@ -56,6 +56,21 @@ describe MoviesController do
     end
   end
   
+  describe 'Delete a Movie' do
+    let (:fake_movie) {double("movie", :id => 1, :title => "Star Wars")}
+    it 'should find and delete the movie' do
+      Movie.should_receive(:find).with("1").and_return(fake_movie)
+      fake_movie.should_receive(:destroy)
+      delete :destroy, :id => 1
+    end
+    it 'should display a nice message' do
+      Movie.should_receive(:find).with("1").and_return(fake_movie)
+      fake_movie.should_receive(:destroy)
+      delete :destroy, :id => 1
+      flash[:notice].should eq("Movie 'Star Wars' deleted.")
+    end
+  end
+  
   describe 'Find Other Movies by Same Director' do
     context 'given a movie with a known director' do
       let (:fake_movie) {double("movie", :director=>'George Lucas')}
