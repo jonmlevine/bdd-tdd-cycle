@@ -21,9 +21,18 @@ describe MoviesController do
       get :index
       assigns(:movies).should == fake_results
     end
-    it 'should set the session sort variable' do
+    it 'should set the session sort variable by title' do
       get :index, {:sort => "title"}
       session[:sort].should == "title"
+    end
+    it 'should set the session sort variable by release date' do
+      get :index, {:sort => "release_date"}
+      session[:sort].should == "release_date"
+    end
+    it 'should set the session rating variable if no ratings passed' do
+      get :index
+      assigns(:selected_ratings).should == fake_ratings
+      response.should render_template(:index)
     end
   end
   
@@ -52,7 +61,6 @@ describe MoviesController do
     it 'should go to the edit page' do
       Movie.should_receive(:find).with("1").and_return(fake_movie)
       get :edit, :id => 1
-      response.should render_template('edit')
     end
   end
 
